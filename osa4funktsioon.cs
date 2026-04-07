@@ -92,10 +92,10 @@ namespace Naidiscsharp
                 Console.WriteLine(kuu);
             }
 
-            // Eemalda "Juuni"
+
             kuude_list.Remove("Juuni");
 
-            // Muuda esimest elementi
+       
             if (kuude_list.Count > 0)
                 kuude_list[0] = "Veeel kuuu";
 

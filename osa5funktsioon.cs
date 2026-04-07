@@ -26,35 +26,76 @@ namespace Naidiscsharp
         public static void KaloriKalkulaator()
         {
             List<Toode> tooted = new List<Toode>()
-        {
-            new Toode{Nimi="Õun", Kalorid100g=52},
-            new Toode{Nimi="Kana", Kalorid100g=239},
-            new Toode{Nimi="Riis", Kalorid100g=130}
-        };
+    {
+        new Toode{Nimi="Õun", Kalorid100g=52},
+        new Toode{Nimi="Kana", Kalorid100g=239},
+        new Toode{Nimi="Riis", Kalorid100g=130}
+    };
 
             Inimene inimene = new Inimene();
 
             Console.Write("Nimi: ");
             inimene.Nimi = Console.ReadLine();
 
-            Console.Write("Vanus: ");
-            inimene.Vanus = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.Write("Vanus: ");
+                if (int.TryParse(Console.ReadLine(), out int vanus) && vanus > 0)
+                {
+                    inimene.Vanus = vanus;
+                    break;
+                }
+                Console.WriteLine("Viga: sisesta positiivne täisarv!");
+            }
 
-            Console.Write("Sugu (M/N): ");
-            inimene.Sugu = Console.ReadLine();
+            while (true)
+            {
+                Console.Write("Sugu (M/N): ");
+                string sugu = Console.ReadLine().ToUpper();
+                if (sugu == "M" || sugu == "N")
+                {
+                    inimene.Sugu = sugu;
+                    break;
+                }
+                Console.WriteLine("Viga: sisesta M või N!");
+            }
 
-            Console.Write("Pikkus (cm): ");
-            inimene.Pikkus = double.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.Write("Pikkus (cm): ");
+                if (double.TryParse(Console.ReadLine(), out double pikkus) && pikkus > 0)
+                {
+                    inimene.Pikkus = pikkus;
+                    break;
+                }
+                Console.WriteLine("Viga: sisesta positiivne arv!");
+            }
 
-            Console.Write("Kaal (kg): ");
-            inimene.Kaal = double.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.Write("Kaal (kg): ");
+                if (double.TryParse(Console.ReadLine(), out double kaal) && kaal > 0)
+                {
+                    inimene.Kaal = kaal;
+                    break;
+                }
+                Console.WriteLine("Viga: sisesta positiivne arv!");
+            }
 
-            Console.Write("Aktiivsus (1.2-1.9): ");
-            inimene.Aktiivsus = double.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.Write("Aktiivsus (1.2-1.9): ");
+                if (double.TryParse(Console.ReadLine(), out double aktiivsus) && aktiivsus >= 1.2 && aktiivsus <= 1.9)
+                {
+                    inimene.Aktiivsus = aktiivsus;
+                    break;
+                }
+                Console.WriteLine("Viga: sisesta arv vahemikus 1.2 kuni 1.9!");
+            }
 
             double bmr;
 
-            if (inimene.Sugu.ToUpper() == "M")
+            if (inimene.Sugu == "M")
                 bmr = 88.36 + (13.4 * inimene.Kaal) + (4.8 * inimene.Pikkus) - (5.7 * inimene.Vanus);
             else
                 bmr = 447.6 + (9.2 * inimene.Kaal) + (3.1 * inimene.Pikkus) - (4.3 * inimene.Vanus);
@@ -190,8 +231,24 @@ namespace Naidiscsharp
 
         public static void MassiivStatistika()
         {
-            Console.Write("Sisesta arvud: ");
-            double[] arr = Console.ReadLine().Split(' ').Select(double.Parse).ToArray();
+            double[] arr;
+
+            while (true)
+            {
+                Console.Write("Sisesta arvud (eraldatud tühikuga): ");
+                string input = Console.ReadLine();
+                string[] tokens = input.Split(' ');
+
+                try
+                {
+                    arr = tokens.Select(x => double.Parse(x)).ToArray();
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Viga: sisesta ainult numbrid!");
+                }
+            }
 
             double max = arr.Max();
             double min = arr.Min();
@@ -206,7 +263,6 @@ namespace Naidiscsharp
             Array.Sort(arr);
             Console.WriteLine("Sorteeritud: " + string.Join(", ", arr));
         }
-
         public class Lemmikloom
         {
             public string Nimi;
@@ -223,16 +279,26 @@ namespace Naidiscsharp
                 Lemmikloom l = new Lemmikloom();
                 Console.Write("Nimi: ");
                 l.Nimi = Console.ReadLine();
+
                 Console.Write("Liik: ");
                 l.Liik = Console.ReadLine();
-                Console.Write("Vanus: ");
-                l.Vanus = int.Parse(Console.ReadLine());
+
+                while (true)
+                {
+                    Console.Write("Vanus: ");
+                    if (int.TryParse(Console.ReadLine(), out int vanus) && vanus >= 0)
+                    {
+                        l.Vanus = vanus;
+                        break;
+                    }
+                    Console.WriteLine("Viga: sisesta positiivne täisarv!");
+                }
 
                 list.Add(l);
             }
 
             Console.WriteLine("Kassid:");
-            foreach (var l in list.Where(x => x.Liik == "kass"))
+            foreach (var l in list.Where(x => x.Liik.ToLower() == "kass"))
                 Console.WriteLine(l.Nimi);
 
             Console.WriteLine("Keskmine vanus: " + list.Average(x => x.Vanus));
@@ -257,25 +323,35 @@ namespace Naidiscsharp
         public static void ValuutaKalkulaator()
         {
             Dictionary<string, Valuuta> val = new Dictionary<string, Valuuta>()
-        {
-            {"USD", new Valuuta{Nimi="USD", Kurss=1.1}},
-            {"GBP", new Valuuta{Nimi="GBP", Kurss=0.85}}
-        };
+    {
+        {"USD", new Valuuta{Nimi="USD", Kurss=1.1}},
+        {"GBP", new Valuuta{Nimi="GBP", Kurss=0.85}}
+    };
 
-            Console.Write("Summa: ");
-            double summa = double.Parse(Console.ReadLine());
-
-            Console.Write("Valuuta (USD/GBP): ");
-            string v = Console.ReadLine().ToUpper();
-
-            if (val.ContainsKey(v))
+            double summa;
+            while (true)
             {
-                double eur = summa / val[v].Kurss;
-                Console.WriteLine($"EUR: {eur:F2}");
-
-                double tagasi = eur * val[v].Kurss;
-                Console.WriteLine($"{v}: {tagasi:F2}");
+                Console.Write("Summa: ");
+                if (double.TryParse(Console.ReadLine(), out summa) && summa > 0)
+                    break;
+                Console.WriteLine("Viga: sisesta positiivne number!");
             }
+
+            string v;
+            while (true)
+            {
+                Console.Write("Valuuta (USD/GBP): ");
+                v = Console.ReadLine().ToUpper();
+                if (val.ContainsKey(v))
+                    break;
+                Console.WriteLine("Viga: vali ainult USD või GBP!");
+            }
+
+            double eur = summa / val[v].Kurss;
+            Console.WriteLine($"EUR: {eur:F2}");
+
+            double tagasi = eur * val[v].Kurss;
+            Console.WriteLine($"{v}: {tagasi:F2}");
         }
         public static void array_naide()
         {
@@ -301,8 +377,6 @@ namespace Naidiscsharp
                     Console.WriteLine(nimi);
             }
         }
-
-
 
         public static void Tuple()
         {
@@ -352,12 +426,7 @@ namespace Naidiscsharp
 
         }
 
-
-
-
     }
-
-
 
     public class Person
     {

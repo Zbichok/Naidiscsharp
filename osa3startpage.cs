@@ -42,7 +42,7 @@ namespace Naidiscsharp
                     osa3funktsioon.SuurimNeliarv();
                     break;
                 case "5":
-
+                    osa3funktsioon.Korrutustabel(5, 5);
                     break;
                 case "6":
                     osa3funktsioon.Opilastegmangimine();
@@ -61,9 +61,6 @@ namespace Naidiscsharp
                     break;
                 case "11":
                     osa3funktsioon.PaarisjaPaaritu();
-                    break;
-                case "12":
-                    osa3funktsioon.arvuAnaluus();
                     break;
                 default:
                     Console.WriteLine("Vale valik. Palun vali 1-13.");

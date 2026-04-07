@@ -60,11 +60,7 @@ namespace Naidiscsharp
                 }
 
             }
-
-
-
         }
-
         public static void arvumang()
         {
             Random rnd = new Random();
@@ -105,9 +101,7 @@ namespace Naidiscsharp
         public static void SuurimNeliarv()
         {
             Console.WriteLine("Sisesta neli arvu:");
-
             double[] arvud = new double[4];
-
             for (int i = 0; i < arvud.Length; i++)
             {
                 double arv;
@@ -115,17 +109,21 @@ namespace Naidiscsharp
                 {
                     Console.Write($"Sisesta {i + 1}. arv: ");
                     string sisend = Console.ReadLine();
-
-                    if (double.TryParse(sisend, out arv))
-                        break;
-
-                    Console.WriteLine("Viga: sisesta korrektne arv!");
+                    if (!double.TryParse(sisend, out arv))
+                    {
+                        Console.WriteLine("Viga: sisesta korrektne arv!");
+                        continue;
+                    }
+                    if (arv < 0)
+                    {
+                        Console.WriteLine("Viga: negatiivsed arvud ei ole lubatud!");
+                        continue;
+                    }
+                    break;
                 }
-
-                arvud[i] = arv; 
+                arvud[i] = arv;
             }
             double suurim = arvud[0];
-
             foreach (double arv in arvud)
             {
                 if (arv > suurim)
@@ -133,6 +131,7 @@ namespace Naidiscsharp
                     suurim = arv;
                 }
             }
+            Console.WriteLine("");
             Console.WriteLine($"Suurim arv on: {suurim}");
         }
         public static void Korrutustabel(int read, int veerud)
