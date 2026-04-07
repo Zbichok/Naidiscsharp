@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Naidiscsharp": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
