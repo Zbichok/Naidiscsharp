@@ -94,25 +94,53 @@ namespace Naidiscsharp
             Console.WriteLine($"{nimi1} ja {nimi2} on täna pinginaabrid.");
         }
 
-        
+
         public static void RemondiKalk()
         {
-            Console.Write("Sisesta toa esimese seina pikkus (m): ");
-            double a = double.Parse(Console.ReadLine());
+            double a, b;
 
-            Console.Write("Sisesta toa teise seina pikkus (m): ");
-            double b = double.Parse(Console.ReadLine());
+
+            while (true)
+            {
+                Console.Write("Sisesta toa esimese seina pikkus (m): ");
+                string sisend = Console.ReadLine();
+
+                if (double.TryParse(sisend, out a) && a > 0)
+                    break;
+
+                Console.WriteLine("Viga: sisesta positiivne number!");
+            }
+
+            while (true)
+            {
+                Console.Write("Sisesta toa teise seina pikkus (m): ");
+                string sisend = Console.ReadLine();
+
+                if (double.TryParse(sisend, out b) && b > 0)
+                    break;
+
+                Console.WriteLine("Viga: sisesta positiivne number!");
+            }
 
             double pindala = a * b;
             Console.WriteLine("Põranda pindala on " + pindala + " m2.");
 
             Console.Write("Kas soovid remonti teha? (jah/ei): ");
-            string soov = Console.ReadLine();
+            string soov = Console.ReadLine().ToLower();
 
             if (soov == "jah")
             {
-                Console.Write("Sisesta ruutmeetri hind (€/m2): ");
-                double ruutmeetriHind = double.Parse(Console.ReadLine());
+                double ruutmeetriHind;
+                while (true)
+                {
+                    Console.Write("Sisesta ruutmeetri hind (€/m2): ");
+                    string sisend = Console.ReadLine();
+
+                    if (double.TryParse(sisend, out ruutmeetriHind) && ruutmeetriHind > 0)
+                        break;
+
+                    Console.WriteLine("Viga: sisesta positiivne number!");
+                }
 
                 double hind = pindala * ruutmeetriHind;
                 Console.WriteLine("Põranda vahetamise hind on " + hind + " euro.");
@@ -122,18 +150,40 @@ namespace Naidiscsharp
                 Console.WriteLine("Remonti ei arvutata.");
             }
         }
+
         public static void soodustus()
         {
-            Console.WriteLine("Sisesta 30% soodushind");
-            double soodushind = double.Parse(Console.ReadLine());
+            double soodushind;
+
+            while (true)
+            {
+                Console.Write("Sisesta 30% soodushind: ");
+                string sisend = Console.ReadLine();
+
+                if (double.TryParse(sisend, out soodushind) && soodushind > 0)
+                    break;
+
+                Console.WriteLine("Viga: sisesta positiivne number!");
+            }
 
             double algneHind = soodushind * 100 / 30;
-            Console.WriteLine("Alghind oli umbes " + algneHind.ToString("F2") + "euro.");
+
+            Console.WriteLine("Alghind oli umbes " + algneHind.ToString("F2") + " euro.");
         }
         public static void temperatuur()
         {
-            Console.Write("Sisesta temperatuur (°C): ");
-            double temp = double.Parse(Console.ReadLine());
+            double temp;
+
+            while (true)
+            {
+                Console.Write("Sisesta temperatuur (°C): ");
+                string sisend = Console.ReadLine();
+
+                if (double.TryParse(sisend, out temp))
+                    break;
+
+                Console.WriteLine("Viga: sisesta korrektne arv!");
+            }
 
             if (temp > 18)
                 Console.WriteLine("Temperatuur on üle 18 kraadi.");
@@ -142,16 +192,27 @@ namespace Naidiscsharp
         }
         public static void inimPikkus()
         {
-            Console.WriteLine("Sisesta pikkus ");
-            int pikkus = int.Parse(Console.ReadLine());
+            int pikkus;
+
+
+            while (true)
+            {
+                Console.Write("Sisesta pikkus (cm): ");
+                string sisend = Console.ReadLine();
+
+                if (int.TryParse(sisend, out pikkus) && pikkus > 0)
+                    break;
+
+                Console.WriteLine("Viga: sisesta positiivne täisarv!");
+            }
 
             if (pikkus < 163)
             {
-                Console.WriteLine("Sa oled lühikest pikkust ");
+                Console.WriteLine("Sa oled lühikest kasvu");
             }
             else if (pikkus < 185)
             {
-                Console.WriteLine(" Sa oled keskmist pikkust ");
+                Console.WriteLine("Sa oled keskmist kasvu");
             }
             else
             {
@@ -160,27 +221,50 @@ namespace Naidiscsharp
         }
         public static void inimPikkusJaSugu()
         {
-            Console.Write("Sisesta sugu (m/n): ");
-            string sugu = Console.ReadLine().Trim().ToLower();
+            string sugu;
+            while (true)
+            {
+                Console.Write("Sisesta sugu (m/n): ");
+                sugu = Console.ReadLine().Trim().ToLower();
 
-            Console.Write("Sisesta pikkus (cm): ");
-            int pikkus = int.Parse(Console.ReadLine());
+                if (sugu == "m" || sugu == "n")
+                    break;
+
+                Console.WriteLine("Viga: sisesta ainult 'm' või 'n'!");
+            }
+
+            int pikkus;
+
+
+            while (true)
+            {
+                Console.Write("Sisesta pikkus (cm): ");
+                string sisend = Console.ReadLine();
+
+                if (int.TryParse(sisend, out pikkus) && pikkus > 0)
+                    break;
+
+                Console.WriteLine("Viga: sisesta positiivne täisarv!");
+            }
 
             if (sugu == "m")
             {
-                if (pikkus < 170) Console.WriteLine("Sa oled lühikest pikkust.");
-                else if (pikkus <= 190) Console.WriteLine("Sa oled keskmist pikkust.");
-                else Console.WriteLine("Sa oled pikk.");
+                if (pikkus < 170)
+                    Console.WriteLine("Sa oled lühikest kasvu.");
+                else if (pikkus <= 190)
+                    Console.WriteLine("Sa oled keskmist kasvu.");
+                else
+                    Console.WriteLine("Sa oled pikk.");
             }
-            else if (sugu == "n")
-            {
-                if (pikkus < 160) Console.WriteLine("Sa oled lühikest pikkust.");
-                else if (pikkus <= 180) Console.WriteLine("Sa oled keskmist pikkust.");
-                else Console.WriteLine("Sa oled pikk.");
-            }
+
             else
             {
-                Console.WriteLine("ERROR");
+                if (pikkus < 160)
+                    Console.WriteLine("Sa oled lühikest kasvu.");
+                else if (pikkus <= 180)
+                    Console.WriteLine("Sa oled keskmist kasvu.");
+                else
+                    Console.WriteLine("Sa oled pikk.");
             }
         }
         public static void poesOstetudAsjad()
@@ -193,7 +277,8 @@ namespace Naidiscsharp
             string ostud = "";
 
             Console.Write("Kas soovid osta piima? (jah/ei): ");
-            string piim = Console.ReadLine();
+            string piim = Console.ReadLine().Trim().ToLower();
+
             if (piim == "jah")
             {
                 summa += hindPiim;
@@ -201,7 +286,8 @@ namespace Naidiscsharp
             }
 
             Console.Write("Kas soovid osta saia? (jah/ei): ");
-            string sai = Console.ReadLine();
+            string sai = Console.ReadLine().Trim().ToLower();
+
             if (sai == "jah")
             {
                 summa += hindSai;
@@ -209,17 +295,20 @@ namespace Naidiscsharp
             }
 
             Console.Write("Kas soovid osta leiba? (jah/ei): ");
-            string leib = Console.ReadLine();
+            string leib = Console.ReadLine().Trim().ToLower();
+
             if (leib == "jah")
             {
                 summa += hindLeib;
                 ostud += "leib ";
             }
 
-            if (ostud == "")
+            if (string.IsNullOrWhiteSpace(ostud))
                 Console.WriteLine("Sa ei ostnud midagi.");
             else
-                Console.WriteLine("Ostetud: " + ostud + "Kokku: " + summa + " euro.");
+                Console.WriteLine("Ostetud: " + ostud + "Kokku: " + summa.ToString("F2") + " euro.");
         }
     }
 }
+
+

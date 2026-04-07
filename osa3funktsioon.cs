@@ -29,17 +29,17 @@ namespace Naidiscsharp
             }
 
         }
-        public static Tuple<double, double, double> arvuAnaluus(double[] arvud)
+        public static (double summa, double keskmine, double korrutis) arvuAnaluus(double[] arvud)
         {
             double summa = arvud.Sum();
             double keskmine = arvud.Average();
-            double korrutis = 1;
 
+            double korrutis = 1;
             foreach (double arv in arvud)
             {
                 korrutis *= arv;
             }
-            return Tuple.Create(summa, keskmine, korrutis);
+            return (summa, keskmine, korrutis);
         }
 
 
@@ -70,10 +70,21 @@ namespace Naidiscsharp
             Random rnd = new Random();
             int arv = rnd.Next(1, 101);
             int katse = 0;
+
             for (int i = 0; i < 5; i++)
             {
-                Console.Write("Arva ära number 1-100: ");
-                int arva = int.Parse(Console.ReadLine());
+                int arva;
+                while (true)
+                {
+                    Console.Write("Arva ära number 1-100: ");
+                    string sisend = Console.ReadLine();
+
+                    if (int.TryParse(sisend, out arva) && arva >= 1 && arva <= 100)
+                        break;
+
+                    Console.WriteLine("Viga: sisesta number vahemikus 1–100!");
+                }
+
                 katse++;
                 if (arva > arv)
                 {
@@ -89,22 +100,40 @@ namespace Naidiscsharp
                     break;
                 }
             }
-
         }
 
         public static void SuurimNeliarv()
         {
             Console.WriteLine("Sisesta neli arvu:");
+
             double[] arvud = new double[4];
+
             for (int i = 0; i < arvud.Length; i++)
             {
-                Console.Write($"Sisesta {i + 1}. arv: ");
-
-                foreach (double arv in arvud)
+                double arv;
+                while (true)
                 {
-                    Console.WriteLine(arv);
+                    Console.Write($"Sisesta {i + 1}. arv: ");
+                    string sisend = Console.ReadLine();
+
+                    if (double.TryParse(sisend, out arv))
+                        break;
+
+                    Console.WriteLine("Viga: sisesta korrektne arv!");
+                }
+
+                arvud[i] = arv; 
+            }
+            double suurim = arvud[0];
+
+            foreach (double arv in arvud)
+            {
+                if (arv > suurim)
+                {
+                    suurim = arv;
                 }
             }
+            Console.WriteLine($"Suurim arv on: {suurim}");
         }
         public static void Korrutustabel(int read, int veerud)
         {
