@@ -8,121 +8,99 @@ namespace Naidiscsharp
 {
     internal class osa4funktsioon
     {
-        public static void tekstisisestamine()
+    public static void LisaLemmikToit()
         {
+            Console.Write("Sisesta oma lemmik Itaalia toit: ");
+            string toit = Console.ReadLine();
+
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Retseptid.txt");
+
             try
             {
-                string path = @"/Users/opilane/Desktop/Fail.txt"; //@"..\..\..\Kuud.txt"
-                StreamWriter text = new StreamWriter(path, true); // true = lisa lõppu
-                Console.WriteLine("Sisesta mingi tekst: ");
-                string lause = Console.ReadLine();
-                text.WriteLine(lause);
-                text.Close();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Mingi viga failiga");
-            }
-        }
-        public static void Tekstilugemine()
-        {
-            try
-            {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kuud.txt");
-                StreamReader text = new StreamReader(path);
-                string laused = text.ReadToEnd();
-                text.Close();
-                Console.WriteLine(laused);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Mingi viga failiga, ei saa faili lugeda");
-            }
-        }
-        public static void Ridade_lugemine(string file)
-        {
-            List<string> kuude_list = new List<string>();
-            try
-            {
-                string path = @$"..\..\..\{file}";
-                ;
-                foreach (string rida in File.ReadAllLines(path))
+                using (StreamWriter sw = new StreamWriter(path, true)) // true = lisab lõppu
                 {
-                    kuude_list.Add(rida);
+                    sw.WriteLine(toit);
                 }
-                foreach (string i in kuude_list) Console.WriteLine(i);
+                Console.WriteLine("Toit on faili edukalt lisatud!");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Viga failiga");
+                Console.WriteLine("Faili kirjutamisel tekkis viga: " + ex.Message);
             }
-
         }
-        public static List<string> Ridade_lugemine_listiks(string file)
-        {
 
-            List<string> kuude_list = new List<string>();
+ 
+        public static void Kuvamenyy()
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Retseptid.txt");
+
             try
             {
-
-                string path = @$"..\..\..\{file}";
-                foreach (string rida in File.ReadAllLines(path))
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    kuude_list.Add(rida);
-
+                    string sisu = sr.ReadToEnd();
+                    Console.WriteLine("Menüü sisu:\n" + sisu);
                 }
-
-
             }
-
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Viga failiga!");
-            }
-            return kuude_list;
-
-
-        }
-        public static void listi_muutmine(string file)
-        {
-            List<string> kuude_list = Ridade_lugemine_listiks(file);
-
-            foreach (string kuu in kuude_list)
-            {
-                Console.WriteLine(kuu);
-            }
-
-
-            kuude_list.Remove("Juuni");
-
-       
-            if (kuude_list.Count > 0)
-                kuude_list[0] = "Veeel kuuu";
-
-            Console.WriteLine("--------------Kustutasime juuni-----------");
-
-            foreach (string kuu in kuude_list)
-            {
-                Console.WriteLine(kuu);
+                Console.WriteLine("Faili lugemisel tekkis viga: " + ex.Message);
             }
         }
-        public static void Otsing(string file)
+
+
+        public static List<string> MuudaKoostisosi()
         {
-            List<string> kuude_list = Ridade_lugemine_listiks(file);
-            Console.WriteLine("Sisesta kuu nimi, mida otsida:");
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Koostisosad.txt");
+            List<string> koostisosad = new List<string>();
+
+            try
+            {
+                string[] read = File.ReadAllLines(path);
+                koostisosad.AddRange(read);
+
+                if (koostisosad.Count > 0)
+                    koostisosad[0] = "Kvaliteetne oliiviõli";
+
+                koostisosad.Remove("Ketšup");
+
+                Console.WriteLine("Uuenenud koostisosad:");
+                foreach (string koostis in koostisosad)
+                {
+                    Console.WriteLine(koostis);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Faili lugemisel tekkis viga: " + ex.Message);
+            }
+
+            return koostisosad;
+        }
+
+        public static void OtsiKoostisosa(List<string> koostisosad)
+        {
+            Console.Write("Sisesta otsitav koostisosa: ");
             string otsitav = Console.ReadLine();
 
-            if (kuude_list.Contains(otsitav))
-                Console.WriteLine("Kuu " + otsitav + " on olemas.");
+            if (koostisosad.Contains(otsitav))
+                Console.WriteLine("Koostisosa on olemas!");
             else
-                Console.WriteLine("Sellist kuud pole.");
+                Console.WriteLine("Seda koostisosa meil retseptis ei ole.");
         }
-        public static void Listisalvestamine(string file)
+        public static void SalvestaKoostisosa(List<string> koostisosad)
         {
-            List<string> kuude_list = Ridade_lugemine_listiks(file);
-            string path = @$"..\..\..\{file}";
-            File.WriteAllLines(path, kuude_list);
-            Console.WriteLine("Andmed on salvestatud.");
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Koostisosad.txt");
+
+            try
+            {
+                File.WriteAllLines(path, koostisosad);
+                Console.WriteLine("Uus retsept on edukalt faili salvestatud!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Faili salvestamisel tekkis viga: " + ex.Message);
+            }
         }
     }
 }

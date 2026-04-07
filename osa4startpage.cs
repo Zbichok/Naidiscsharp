@@ -13,38 +13,40 @@ namespace Naidiscsharp
         {
             Console.WriteLine("Osa 4 - Failid");
             Console.WriteLine("Vali meetod");
-            Console.WriteLine("1 - tekstisisestamine");
-            Console.WriteLine("2 - Tekstilugemine");
-            Console.WriteLine("3 - Ridade_lugemine");
-            Console.WriteLine("4 - listi_muutmine");
-            Console.WriteLine("5 - Otsing");
-            Console.WriteLine("6 - Listisalvestamine");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("7 - ItaliaToit ");
+            Console.WriteLine("1 - LisaLemmikToit");
+            Console.WriteLine("2 - Kuvamenyy");
+            Console.WriteLine("3 - MuudaKoostisosi");
+            Console.WriteLine("4 - OtsiKoostisosa");
+            Console.WriteLine("5 - SalvestaKoostisosa");
+            Console.WriteLine("======================");
+            Console.WriteLine("6 - MainItalia");
             string valik = Console.ReadLine();
             switch (valik)
             {
                 case "1":
-                    osa4funktsioon.tekstisisestamine();
+                    osa4funktsioon.LisaLemmikToit();
                     break;
                 case "2":
-                    osa4funktsioon.Tekstilugemine();
+                    osa4funktsioon.Kuvamenyy();
                     break;
                 case "3":
-                    Console.WriteLine("Sisesta faili nimi: ");
-                    string file = Console.ReadLine();
-                    osa4funktsioon.Ridade_lugemine(file);
-                    break;
+                    {
+                        List<string> list = osa4funktsioon.MuudaKoostisosi();
+                        break;
+                    }
                 case "4":
-                   osa4funktsioon.listi_muutmine("test.txt");
-                    break;
+                    {
+                        List<string> list = osa4funktsioon.MuudaKoostisosi(); 
+                        osa4funktsioon.OtsiKoostisosa(list);
+                        break;
+                    }
                 case "5":
-                   osa4funktsioon.Otsing("test.txt");
-                    break;
+                    {
+                        List<string> list = osa4funktsioon.MuudaKoostisosi(); 
+                        osa4funktsioon.SalvestaKoostisosa(list);
+                        break;
+                    }
                 case "6":
-                    osa4funktsioon.Listisalvestamine("test.txt");
-                    break;
-                case "7":
                     ItaaliaMain.MainItalia(new string[0]);
                     break;
                 default:

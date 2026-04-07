@@ -29,19 +29,6 @@ namespace Naidiscsharp
             }
 
         }
-        public static (double summa, double keskmine, double korrutis) arvuAnaluus(double[] arvud)
-        {
-            double summa = arvud.Sum();
-            double keskmine = arvud.Average();
-
-            double korrutis = 1;
-            foreach (double arv in arvud)
-            {
-                korrutis *= arv;
-            }
-            return (summa, keskmine, korrutis);
-        }
-
 
         public static void ostaElevantAra()
         {
@@ -63,76 +50,90 @@ namespace Naidiscsharp
         }
         public static void arvumang()
         {
-            Random rnd = new Random();
-            int arv = rnd.Next(1, 101);
-            int katse = 0;
+            bool uuesti = true; 
 
-            for (int i = 0; i < 5; i++)
+            while (uuesti) 
             {
-                int arva;
-                while (true)
-                {
-                    Console.Write("Arva ära number 1-100: ");
-                    string sisend = Console.ReadLine();
+                Random rnd = new Random();
+                int arv = rnd.Next(1, 101);
+                int katse = 0;
 
-                    if (int.TryParse(sisend, out arva) && arva >= 1 && arva <= 100)
+                Console.WriteLine("\nArvuti valis numbri 1–100. Sul on 5 katset.");
+
+                while (katse < 5)
+                {
+                    int arva;
+                    while (true) 
+                    {
+                        Console.Write("Arva ära number 1–100: ");
+                        string sisend = Console.ReadLine();
+
+                        if (int.TryParse(sisend, out arva) && arva >= 1 && arva <= 100)
+                            break;
+
+                        Console.WriteLine("Viga: sisesta number vahemikus 1–100!");
+                    }
+
+                    katse++;
+
+                    if (arva > arv)
+                    {
+                        Console.WriteLine("Sinu number on väiksem");
+                    }
+                    else if (arva < arv)
+                    {
+                        Console.WriteLine("Sinu number on suurem");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Õige! Arvasid ära {katse}. katsel.");
                         break;
-
-                    Console.WriteLine("Viga: sisesta number vahemikus 1–100!");
+                    }
                 }
 
-                katse++;
-                if (arva > arv)
+               
+                if (katse == 5 && arv != katse)
                 {
-                    Console.WriteLine("Sinu number on väiksem");
+                    Console.WriteLine($"Mäng läbi! Arv oli {arv}.");
                 }
-                else if (arva < arv)
-                {
-                    Console.WriteLine("Sinu number on suurem");
-                }
-                else
-                {
-                    Console.WriteLine($"Õige! Arvasid ära {katse} katsel.");
-                    break;
-                }
+
+                Console.Write("Kas soovid uuesti mängida? (jah/ei): ");
+                string vastus = Console.ReadLine().Trim().ToLower();
+                uuesti = (vastus == "jah" || vastus == "j");
             }
         }
 
         public static void SuurimNeliarv()
         {
-            Console.WriteLine("Sisesta neli arvu:");
-            double[] arvud = new double[4];
-            for (int i = 0; i < arvud.Length; i++)
+            int[] arvud = new int[4];
+
+            Console.WriteLine("Sisesta 4 ühekohalist arvu (0–9):");
+
+            for (int i = 0; i < 4; i++)
             {
-                double arv;
                 while (true)
                 {
-                    Console.Write($"Sisesta {i + 1}. arv: ");
+                    Console.WriteLine($"Sisesta {i + 1}. arv: ");
                     string sisend = Console.ReadLine();
-                    if (!double.TryParse(sisend, out arv))
+
+                    if (int.TryParse(sisend, out int arv) && arv >= 0 && arv <= 9)
                     {
-                        Console.WriteLine("Viga: sisesta korrektne arv!");
-                        continue;
+                        arvud[i] = arv;
+                        break;
                     }
-                    if (arv < 0)
+                    else
                     {
-                        Console.WriteLine("Viga: negatiivsed arvud ei ole lubatud!");
-                        continue;
+                        Console.WriteLine("Viga: sisesta ühekohaline number vahemikus 0–9!");
                     }
-                    break;
-                }
-                arvud[i] = arv;
-            }
-            double suurim = arvud[0];
-            foreach (double arv in arvud)
-            {
-                if (arv > suurim)
-                {
-                    suurim = arv;
                 }
             }
-            Console.WriteLine("");
-            Console.WriteLine($"Suurim arv on: {suurim}");
+
+            Array.Sort(arvud);
+            Array.Reverse(arvud);
+
+            int maksimaalne = arvud[0] * 1000 + arvud[1] * 100 + arvud[2] * 10 + arvud[3];
+
+            Console.WriteLine($"Suurim võimalik neljakohaline arv on: {maksimaalne}");
         }
         public static void Korrutustabel(int read, int veerud)
         {
@@ -163,17 +164,17 @@ namespace Naidiscsharp
                 }
                 nr = nr + 1;
             }
-            Console.WriteLine("\nKõik nimed ja indeksid (for):");
+            Console.WriteLine("Kõik nimed ja indeksid (for):");
             for (int i = 0; i < nimed.Length; i++)
             {
                 Console.WriteLine(i + " : " + nimed[i]);
             }
-            Console.WriteLine("\nNimed väikeste tähtedena (foreach):");
+            Console.WriteLine("Nimed väikeste tähtedena (foreach):");
             foreach (string nimi in nimed)
             {
                 Console.WriteLine(nimi.ToLower());
             }
-            Console.WriteLine("\nTervitab kuni 'Mati' (do-while):");
+            Console.WriteLine("Tervitab kuni 'Mati' (do-while):");
             int k = 0;
             do
             {
@@ -194,12 +195,12 @@ namespace Naidiscsharp
             {
                 Console.WriteLine(arvud[i] + " -> " + (arvud[i] * arvud[i]));
             }
-            Console.WriteLine("\nKahekordsed (foreach):");
+            Console.WriteLine("Kahekordsed (foreach):");
             foreach (int a in arvud)
             {
                 Console.WriteLine(a + " -> " + (a * 2));
             }
-            Console.WriteLine("\nJagub 3-ga (while loendus):");
+            Console.WriteLine("Jagub 3-ga (while loendus):");
             int nr = 0;
             int loendur = 0;
 

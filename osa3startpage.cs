@@ -23,8 +23,7 @@ namespace Naidiscsharp
             Console.WriteLine("9 - KeskSuuremad");
             Console.WriteLine("10 - KoigeSuuremaOtsing");
             Console.WriteLine("11 - PaarisjaPaaritu");
-            Console.WriteLine("12 - arvuAnaluus ");
-            Console.WriteLine("13 - SõnadePikkus");
+ 
 
             string valik = Console.ReadLine();
             switch (valik)
