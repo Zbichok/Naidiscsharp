@@ -63,7 +63,7 @@ namespace Naidiscsharp
                     osa3funktsioon.PaarisjaPaaritu();
                     break;
                 case "12":
-
+                    osa3funktsioon.arvuAnaluus();
                     break;
                 default:
                     Console.WriteLine("Vale valik. Palun vali 1-13.");
