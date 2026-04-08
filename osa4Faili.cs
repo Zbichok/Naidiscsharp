@@ -91,6 +91,7 @@ namespace Naidiscsharp
             }
 
             kuude_list.Remove("Juuni");
+            kuude_list.RemoveAt(5);
 
             if (kuude_list.Count > 0)
                 kuude_list[0] = "Veeel kuuu";

@@ -104,7 +104,7 @@ namespace Naidiscsharp
 
             Console.WriteLine($"Päevane vajadus: {kalorid:F2} kcal");
 
-            foreach (var t in tooted)
+            foreach (Toode t in tooted)
             {
                 double kogus = kalorid / t.Kalorid100g * 100;
                 Console.WriteLine($"{t.Nimi}: {kogus:F2} g");
