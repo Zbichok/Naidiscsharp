@@ -17,7 +17,7 @@ namespace Naidiscsharp
 
             try
             {
-                using (StreamWriter sw = new StreamWriter(path, true)) // true = lisab lõppu
+                using (StreamWriter sw = new StreamWriter(path, true))
                 {
                     sw.WriteLine(toit);
                 }
@@ -61,12 +61,10 @@ namespace Naidiscsharp
 
                 if (koostisosad.Count > 0)
                     koostisosad[0] = "Kvaliteetne oliiviõli";
-
                 koostisosad.Remove("Ketšup");
-
                 Console.WriteLine("Uuenenud koostisosad:");
                 foreach (string koostis in koostisosad)
-                {
+                {   
                     Console.WriteLine(koostis);
                 }
             }

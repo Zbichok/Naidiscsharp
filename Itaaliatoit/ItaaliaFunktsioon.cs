@@ -49,7 +49,7 @@ namespace Naidiscsharp.Itaaliatoit
             Console.WriteLine("=================================");
             if (menuuList.Count == 0)
             {
-                Console.WriteLine("Menüü on tühi. Palun laadige andmed failist (Valik 1).");
+                Console.WriteLine("Menüü on tühi. Palun laadige andmed failist.");
             }
             else
             {

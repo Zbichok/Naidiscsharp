@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,7 +33,7 @@ namespace Naidiscsharp
                         osa3startpage.Osa3Main();
                         break;
                     case "4":
-                        Osa4StartPAge.Osa4Main();
+                        osa4startpage.Osa4Main();
                         break;
                     case "5":
                         Osa5StartPage.Osa5Main();

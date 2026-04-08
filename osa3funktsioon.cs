@@ -58,7 +58,7 @@ namespace Naidiscsharp
                 int arv = rnd.Next(1, 101);
                 int katse = 0;
 
-                Console.WriteLine("\nArvuti valis numbri 1–100. Sul on 5 katset.");
+                Console.WriteLine("Arvuti valis numbri 1–100. Sul on 5 katset.");
 
                 while (katse < 5)
                 {
@@ -135,23 +135,10 @@ namespace Naidiscsharp
 
             Console.WriteLine($"Suurim võimalik neljakohaline arv on: {maksimaalne}");
         }
-        public static void Korrutustabel(int read, int veerud)
-        {
-            int[,] tabel = new int[read, veerud];
 
-            for (int i = 0; i < read; i++)
-            {
-                for (int j = 0; j < veerud; j++)
-                {
-                    tabel[i, j] = (i + 1) * (j + 1);
-                    Console.Write(tabel[i, j] + "\t");
-                }
-                Console.WriteLine();
-            }
-        }
         public static void Opilastegmangimine()
         {
-            string[] nimed = new string[10] { "Andres", "Mari", "Aadu", "Peeter", "Anna", "Liis", "Airi", "Jaan", "Anu", "Tiit" };
+            string[] nimed = { "Andres", "Mari", "Aadu", "Peeter", "Anna", "Liis", "Airi", "Jaan", "Anu", "Tiit" };
             nimed[2] = "Kati";
             nimed[5] = "Mati";
             Console.WriteLine("A-ga algavad tervitused (while):");

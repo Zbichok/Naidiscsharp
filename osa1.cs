@@ -17,7 +17,6 @@ namespace Naidiscsharp
             Console.WriteLine("\"oli loodud muutuja tekst, mis võrdun: {0}", tekst);
             Console.Write("Mis on sinu nimi");
             string nimi = Console.ReadLine();
-
         }
 
     }

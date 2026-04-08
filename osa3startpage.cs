@@ -16,13 +16,12 @@ namespace Naidiscsharp
             Console.WriteLine("2 - ostaElevantAra ");
             Console.WriteLine("3 - arvumang");
             Console.WriteLine("4 - SuurimNeliarv");
-            Console.WriteLine("5 - Korrutustabel");
-            Console.WriteLine("6 - Opilastegmangimine");
-            Console.WriteLine("7 - ArvudeRuudud");
-            Console.WriteLine("8 - PosJaNeg");
-            Console.WriteLine("9 - KeskSuuremad");
-            Console.WriteLine("10 - KoigeSuuremaOtsing");
-            Console.WriteLine("11 - PaarisjaPaaritu");
+            Console.WriteLine("5 - Opilastegmangimine");
+            Console.WriteLine("6 - ArvudeRuudud");
+            Console.WriteLine("7 - PosJaNeg");
+            Console.WriteLine("8 - KeskSuuremad");
+            Console.WriteLine("9 - KoigeSuuremaOtsing");
+            Console.WriteLine("10 - PaarisjaPaaritu");
  
 
             string valik = Console.ReadLine();
@@ -41,24 +40,21 @@ namespace Naidiscsharp
                     osa3funktsioon.SuurimNeliarv();
                     break;
                 case "5":
-                    osa3funktsioon.Korrutustabel(5, 5);
-                    break;
-                case "6":
                     osa3funktsioon.Opilastegmangimine();
                     break;
-                case "7":
+                case "6":
                     osa3funktsioon.ArvudeRuudud();
                     break;
-                case "8":
+                case "7":
                     osa3funktsioon.PosJaNeg();
                     break;
-                case "9":
+                case "8":
                     osa3funktsioon.KeskSuuremad();
                     break;
-                case "10":
+                case "9":
                     osa3funktsioon.KoigeSuuremaOtsing();
                     break;
-                case "11":
+                case "10":
                     osa3funktsioon.PaarisjaPaaritu();
                     break;
                 default:

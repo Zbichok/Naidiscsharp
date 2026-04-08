@@ -143,7 +143,8 @@ namespace Naidiscsharp
                 }
 
                 double hind = pindala * ruutmeetriHind;
-                Console.WriteLine("Põranda vahetamise hind on " + hind + " euro.");
+                Console.WriteLine($"Põranda vahetamise hind on {hind:F2} euro.");
+
             }
             else
             {
