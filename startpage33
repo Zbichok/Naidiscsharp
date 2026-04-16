@@ -1,0 +1,56 @@
+using System;
+
+class StartPage
+{
+    static void Main(string[] args)
+    {
+        bool töötab = true;
+
+        while (töötab)
+        {
+            Console.WriteLine("\nVali tegevus:");
+            Console.WriteLine("1 - Taksosõidu kalkulaator");
+            Console.WriteLine("2 - Kellaaja eraldaja");
+            Console.WriteLine("3 - Täringu statistika");
+            Console.WriteLine("4 - Ringi arvutused");
+            Console.WriteLine("0 - Välju");
+
+            Console.Write("Sinu valik: ");
+            string valik = Console.ReadLine();
+
+            switch (valik)
+            {
+                case "1":
+                    Alamfunktsioonid.TaksoKalkulaator();
+                    break;
+
+                case "2":
+                    Alamfunktsioonid.HindaKellaaega();
+                    break;
+
+                case "3":
+                    Alamfunktsioonid.TaringuStatistika();
+                    break;
+
+                case "4":
+                    Console.Write("Sisesta raadius: ");
+                    double r = Convert.ToDouble(Console.ReadLine());
+
+                    var tulemus = Alamfunktsioonid.ArvutaRing(r);
+
+                    Console.WriteLine($"Pindala: {tulemus.Item1:F2}");
+                    Console.WriteLine($"Ümbermõõt: {tulemus.Item2:F2}");
+                    break;
+
+                case "0":
+                    töötab = false;
+                    Console.WriteLine("Programm lõpetas töö.");
+                    break;
+
+                default:
+                    Console.WriteLine("Vale valik!");
+                    break;
+            }
+        }
+    }
+}
