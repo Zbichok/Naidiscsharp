@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+
+public class Alamfunktsioonid
+{
+    // Ülesanne 1
+    public static void Piletikalkulaator()
+    {
+        Console.Write("Sisesta täispileti hind (€): ");
+        double hind = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Sisesta täiskasvanute arv: ");
+        int taisk = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Sisesta laste arv: ");
+        int lapsed = Convert.ToInt32(Console.ReadLine());
+
+        double taiskSumma = hind * taisk;
+        double lapseHind = hind * 0.5;
+        double lapseSumma = lapseHind * lapsed;
+
+        double kogu = taiskSumma + lapseSumma;
+
+        Console.WriteLine($"Kogu hind on: {kogu:F2} €");
+    }
+
+    // Ülesanne 2
+    public static void HindaKuupaeva()
+    {
+        Console.Write("Sisesta kuupäev kujul YYYY-MM-DD: ");
+        string kuup = Console.ReadLine();
+
+        if (kuup.Length != 10)
+        {
+            Console.WriteLine("Vigane formaat!");
+            return;
+        }
+
+        string aasta = kuup.Substring(0, 4);
+        string kuu = kuup.Substring(5, 2);
+        string paev = kuup.Substring(8, 2);
+
+        Console.WriteLine($"Sündisid {paev}. päeval, {kuu}. kuul aastal {aasta}.");
+    }
+
+    // Ülesanne 3
+    public static void MundiMang()
+    {
+        Random rnd = new Random();
+        List<int> visked = new List<int>();
+
+        for (int i = 0; i < 10; i++)
+        {
+            int vise = rnd.Next(0, 2);
+            visked.Add(vise);
+        }
+
+        Console.WriteLine("Viske tulemused:");
+        
+        // Numbritega
+        Console.WriteLine(string.Join(", ", visked));
+
+        int kull = 0;
+
+        foreach (int v in visked)
+        {
+            if (v == 1)
+                kull++;
+        }
+
+        Console.WriteLine($"Kull tuli {kull} korda.");
+    }
+
+    // Ülesanne 4
+    public static Tuple<double, double> ArvutaRistkylik(double pikkus, double laius)
+    {
+        double pindala = pikkus * laius;
+        double umbermoot = 2 * (pikkus + laius);
+
+        return Tuple.Create(pindala, umbermoot);
+    }
+}
