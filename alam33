@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+
+public class Alamfunktsioonid
+{
+    // Ülesanne 1
+    public static void TaksoKalkulaator()
+    {
+        Console.Write("Sisesta sisseistumistasu (€): ");
+        double sisse = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Sisesta kilomeetri hind (€/km): ");
+        double kmHind = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Sisesta läbitud kilomeetrid: ");
+        double km = Convert.ToDouble(Console.ReadLine());
+
+        double kogusumma = sisse + (kmHind * km);
+
+        Console.WriteLine($"Taksosõidu hind on: {kogusumma:F2} €");
+    }
+
+    // Ülesanne 2
+    public static void HindaKellaaega()
+    {
+        Console.Write("Sisesta kellaaeg kujul HH:MM:SS: ");
+        string aeg = Console.ReadLine();
+
+        if (aeg.Length != 8)
+        {
+            Console.WriteLine("Vigane kellaaja formaat!");
+            return;
+        }
+
+        string tunnid = aeg.Substring(0, 2);
+        string minutid = aeg.Substring(3, 2);
+        string sekundid = aeg.Substring(6, 2);
+
+        Console.WriteLine($"Kell on täpselt {tunnid} tundi, {minutid} minutit ja {sekundid} sekundit.");
+    }
+
+    // Ülesanne 3
+    public static void TaringuStatistika()
+    {
+        Random rnd = new Random();
+        List<int> visked = new List<int>();
+
+        for (int i = 0; i < 10; i++)
+        {
+            int vise = rnd.Next(1, 7);
+            visked.Add(vise);
+        }
+
+        Console.WriteLine("Visked:");
+        Console.WriteLine(string.Join(", ", visked));
+
+        int kuuesed = 0;
+
+        foreach (int v in visked)
+        {
+            if (v == 6)
+                kuuesed++;
+        }
+
+        Console.WriteLine($"Number 6 visati {kuuesed} korda.");
+    }
+
+    // Ülesanne 4
+    public static Tuple<double, double> ArvutaRing(double raadius)
+    {
+        double pindala = Math.PI * raadius * raadius;
+        double umbermoot = 2 * Math.PI * raadius;
+
+        return Tuple.Create(pindala, umbermoot);
+    }
+}
