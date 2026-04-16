@@ -1,0 +1,117 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+
+public static class AndmeFunktsioonid
+{
+    // Ülesanne 1
+    public static void KirjutaLogi(string teade)
+    {
+        using (StreamWriter sw = new StreamWriter("logi.txt", true))
+        {
+            string rida = $"[{DateTime.Now}] - {teade}";
+            sw.WriteLine(rida);
+        }
+
+        Console.WriteLine("Logi salvestatud.");
+    }
+
+    // Ülesanne 2
+    public static void RiigiOtsing()
+    {
+        Dictionary<string, string> riigid = new Dictionary<string, string>()
+        {
+            { "EE", "Eesti" },
+            { "FI", "Soome" },
+            { "DE", "Saksamaa" }
+        };
+
+        Console.Write("Sisesta riigi kood: ");
+        string kood = Console.ReadLine().ToUpper();
+
+        if (riigid.ContainsKey(kood))
+        {
+            Console.WriteLine("Riik: " + riigid[kood]);
+        }
+        else
+        {
+            Console.Write("Koodi ei leitud. Mis riik see on? ");
+            string nimi = Console.ReadLine();
+            riigid.Add(kood, nimi);
+        }
+
+        Console.WriteLine("\nKõik riigid:");
+        foreach (KeyValuePair<string, string> paar in riigid)
+        {
+            Console.WriteLine($"{paar.Key} - {paar.Value}");
+        }
+    }
+
+    // Ülesanne 3
+    public static Tuple<int, double> LoeJaArvuta()
+    {
+        try
+        {
+            using (StreamReader sr = new StreamReader("arvud.txt"))
+            {
+                string sisu = sr.ReadToEnd();
+                string[] osad = sisu.Split(',');
+
+                int summa = 0;
+
+                foreach (string osa in osad)
+                {
+                    int arv = int.Parse(osa.Trim());
+                    summa += arv;
+                }
+
+                double keskmine = (double)summa / osad.Length;
+
+                return new Tuple<int, double>(summa, keskmine);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Viga: " + ex.Message);
+            return new Tuple<int, double>(0, 0);
+        }
+    }
+
+    // Ülesanne 5
+    public static void HaldaAutosid()
+    {
+        List<Auto> autod = new List<Auto>()
+        {
+            new Auto("Toyota", 5.5, 40),
+            new Auto("BMW", 8.0, 15),
+            new Auto("Audi", 6.5, 8)
+        };
+
+        // Suurima sõiduulatusega auto
+        Auto parim = autod.OrderByDescending(a => a.ArvutaSoiduulatus()).First();
+
+        Console.WriteLine($"Suurim sõiduulatus: {parim.Mudel} - {parim.ArvutaSoiduulatus()} km");
+
+        // Vähe kütust
+        Console.WriteLine("\nTankimist vajavad autod:");
+        foreach (Auto a in autod)
+        {
+            if (a.PaagisOnKutust < 10)
+            {
+                Console.WriteLine(a.Mudel);
+            }
+        }
+
+        // Lisafunktsioon: salvesta tulemused faili
+        using (StreamWriter sw = new StreamWriter("autod.txt"))
+        {
+            foreach (Auto a in autod)
+            {
+                sw.WriteLine($"{a.Mudel}, ulatus: {a.ArvutaSoiduulatus()} km");
+            }
+        }
+
+        Console.WriteLine("\nAndmed salvestatud faili autod.txt");
+    }
+}
